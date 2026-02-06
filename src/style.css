@@ -224,3 +224,50 @@ canvas {
 .warning h3 {
   color: #FF3366;
 }
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  #app {
+    flex-direction: column;
+    gap: 10px;
+    height: auto;
+    min-height: 100vh;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  #sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-width: auto;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    margin-bottom: 0;
+  }
+
+  .score-container {
+    width: auto;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+  }
+
+  /* Adjust Help Button in mobile sidebar */
+  .icon-btn {
+    margin-top: 0;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  canvas {
+    max-height: 80vh;
+    /* Leave room for header */
+  }
+}

@@ -14,20 +14,39 @@ export class Renderer {
         // Handle High DPI displays
         const dpr = window.devicePixelRatio || 1;
 
-        // In the new layout, we want to maximize height up to 90vh usually
-        // Aspect ratio is 1 (width) : 1.5 (height)
+        const isMobile = window.innerWidth <= 768;
 
-        let availHeight = window.innerHeight * 0.9;
-        let width = availHeight / 1.5;
+        let width;
+        let height;
 
-        // Ensure width doesn't exceed screen width (modulo sidebar)
-        // Simple safe check
-        if (width > window.innerWidth - 200) {
-            width = window.innerWidth - 200;
-            availHeight = width * 1.5;
+        if (isMobile) {
+            // Mobile: Width constrained by screen width
+            // Height calculated from width
+            width = window.innerWidth - 20; // 20px padding
+            height = width * 1.5;
+
+            // If height is too tall for screen (leaving no room for header), scale down
+            const maxH = window.innerHeight * 0.75; // Leave 25% for sidebar/header
+            if (height > maxH) {
+                height = maxH;
+                width = height / 1.5;
+            }
+        } else {
+            // Desktop: Height constrained by availHeight
+            let availHeight = window.innerHeight * 0.9;
+            width = availHeight / 1.5;
+
+            // Ensure width doesn't exceed screen width (modulo sidebar)
+            if (width > window.innerWidth - 200) {
+                width = window.innerWidth - 200;
+                // Recalculate height to maintain aspect ratio
+                width = window.innerWidth - 220; // Extra safety
+                // Fix: Ensure height matches new width
+                height = width * 1.5;
+            } else {
+                height = availHeight; // Default case
+            }
         }
-
-        const height = availHeight;
 
         this.canvas.style.width = `${width}px`;
         this.canvas.style.height = `${height}px`;
