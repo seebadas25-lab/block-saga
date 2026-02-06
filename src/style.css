@@ -274,9 +274,25 @@ canvas {
   /* Adjust Help Button in mobile sidebar */
   .icon-btn {
     margin-top: 0;
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+    min-width: 35px;
+    min-height: 35px;
     font-size: 1.2rem;
+    flex-shrink: 0;
+    z-index: 10;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .score-container {
+    width: auto;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: nowrap;
+    overflow: visible;
   }
 
   /* Canvas size handled by JS completely now to avoid aspect ratio distortion */
