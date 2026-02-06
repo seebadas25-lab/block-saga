@@ -1,8 +1,15 @@
 {
   "name": "block-juggle-game",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "homepage": "https://seebadas25-lab.github.io/block-saga/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/seebadas25-lab/block-saga.git"
+  },
+  "author": "seebadas25-lab",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
