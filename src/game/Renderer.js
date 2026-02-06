@@ -14,57 +14,61 @@ export class Renderer {
         // Handle High DPI displays
         const dpr = window.devicePixelRatio || 1;
 
-        const isMobile = window.innerWidth <= 768;
+        // Target Aspect Ratio: Width : Height = 2 : 3 (1 : 1.5)
+        const ASPECT_RATIO = 1.5;
 
-        let width;
-        let height;
+        // Available space calculation
+        let maxWidth, maxHeight;
 
-        if (isMobile) {
-            // Mobile: Width constrained by screen width
-            // Height calculated from width
-            width = window.innerWidth - 20; // 20px padding
-            height = width * 1.5;
-
-            // If height is too tall for screen (leaving no room for header), scale down
-            const maxH = window.innerHeight * 0.75; // Leave 25% for sidebar/header
-            if (height > maxH) {
-                height = maxH;
-                width = height / 1.5;
-            }
+        if (window.innerWidth <= 768) {
+            // Mobile: Full width minus padding, Height allows for UI
+            maxWidth = window.innerWidth - 30; // 15px padding each side
+            // Reserve space for sidebar/header (approx 80px or 15%)
+            let sidebarHeight = 100; // Estimated header height
+            maxHeight = window.innerHeight - sidebarHeight - 20;
         } else {
-            // Desktop: Height constrained by availHeight
-            let availHeight = window.innerHeight * 0.9;
-            width = availHeight / 1.5;
-
-            // Ensure width doesn't exceed screen width (modulo sidebar)
-            if (width > window.innerWidth - 200) {
-                width = window.innerWidth - 200;
-                // Recalculate height to maintain aspect ratio
-                width = window.innerWidth - 220; // Extra safety
-                // Fix: Ensure height matches new width
-                height = width * 1.5;
-            } else {
-                height = availHeight; // Default case
-            }
+            // Desktop: Sidebar is on left (200px approx), so we have rest of width
+            // But usually height is the limiting factor on desktop
+            maxWidth = window.innerWidth - 220;
+            maxHeight = window.innerHeight * 0.9;
         }
 
+        // Calculate dimensions to fit within Box (maxWidth x maxHeight) 
+        // while maintaining ASPECT_RATIO
+
+        let width = maxWidth;
+        let height = width * ASPECT_RATIO;
+
+        // If height exceeds available height, scale down
+        if (height > maxHeight) {
+            height = maxHeight;
+            width = height / ASPECT_RATIO;
+        }
+
+        // Snap to integers to avoid sub-pixel blurring
+        width = Math.floor(width);
+        height = Math.floor(height);
+
+        // Apply style (CSS pixels)
         this.canvas.style.width = `${width}px`;
         this.canvas.style.height = `${height}px`;
 
+        // Apply buffer size (Physical pixels)
         this.canvas.width = width * dpr;
         this.canvas.height = height * dpr;
 
         this.ctx.scale(dpr, dpr);
 
+        // Game Logic Dimensions
         this.width = width;
         this.height = height;
 
-        // Grid is square, based on width
-        this.cellSize = (this.width - 20) / CONFIG.GRID_SIZE; // -20 for padding
+        // Grid (Square top part)
+        this.cellSize = (this.width - 20) / CONFIG.GRID_SIZE;
         this.padding = 10;
 
         // Define Tray Area properties for public access
-        this.gridEnd = this.width; // Y coordinate where grid ends (sqaure)
+        this.gridEnd = this.width;
         this.trayTop = this.gridEnd + 20;
     }
 
