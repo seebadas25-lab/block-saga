@@ -84,31 +84,28 @@ canvas {
 
 .score-box {
   background: rgba(0, 0, 0, 0.05);
-  /* Darker tint for light mode */
   backdrop-filter: blur(10px);
-  padding: 10px 20px;
-  border-radius: 12px;
+  padding: 6px 12px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 80px;
+  min-width: 50px;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .label {
-  font-size: 0.8em;
+  font-size: 0.65em;
   color: #666;
-  /* Darker gray for light mode */
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
 
 .value {
-  font-size: 1.5em;
+  font-size: 1.1em;
   font-weight: 700;
   color: #333;
-  /* Dark text */
 }
 
 .floating-text {
@@ -234,11 +231,11 @@ canvas {
 /* Responsive Layout */
 @media (max-width: 768px) {
   body {
-    padding: 15px;
-    padding-top: env(safe-area-inset-top, 15px);
-    padding-bottom: env(safe-area-inset-bottom, 15px);
-    padding-left: env(safe-area-inset-left, 15px);
-    padding-right: env(safe-area-inset-right, 15px);
+    padding: 20px;
+    padding-top: env(safe-area-inset-top, 20px);
+    padding-bottom: env(safe-area-inset-bottom, 20px);
+    padding-left: env(safe-area-inset-left, 20px);
+    padding-right: env(safe-area-inset-right, 20px);
     box-sizing: border-box;
   }
 
@@ -247,8 +244,8 @@ canvas {
     gap: 15px;
     height: auto;
     min-height: auto;
-    padding: 15px;
-    margin: 10px;
+    padding: 20px;
+    margin: 15px;
     box-sizing: border-box;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.9);
