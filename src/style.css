@@ -266,8 +266,8 @@ canvas {
     font-size: 1.2rem;
   }
 
+  /* Canvas size handled by JS completely now to avoid aspect ratio distortion */
   canvas {
-    max-height: 80vh;
-    /* Leave room for header */
+    max-height: none;
   }
 }
