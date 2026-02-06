@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 
 export default defineConfig({
-    base: '/block-saga/', // Base path for GitHub Pages
+    base: './', // Relative path for better portability
     build: {
         outDir: 'dist',
         assetsDir: 'assets',
