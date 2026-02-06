@@ -2,7 +2,9 @@
 
 A modern, premium "Block Blast" style puzzle game built with Vanilla JavaScript and HTML5 Canvas.
 
-![Block Saga Screenshot](public/vite.svg) <!-- You can replace this with a real screenshot later -->
+![Block Saga Screenshot](public/vite.svg)
+
+> **🎮 Play Online:** [https://seebadas25-lab.github.io/block-saga/](https://seebadas25-lab.github.io/block-saga/)
 
 ## 🎮 Game Description
 
