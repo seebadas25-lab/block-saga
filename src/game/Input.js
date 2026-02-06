@@ -12,22 +12,26 @@ export class Input {
     }
 
     setupListeners() {
+        // Prevent scrolling/zooming when touching the canvas
+        this.canvas.style.touchAction = 'none';
+
         this.canvas.addEventListener('pointerdown', this.handleDown);
         window.addEventListener('pointermove', this.handleMove);
         window.addEventListener('pointerup', this.handleUp);
+        window.addEventListener('pointercancel', this.handleUp);
     }
 
     getCoords(e) {
         const rect = this.canvas.getBoundingClientRect();
-        const scaleX = this.canvas.width / rect.width;
-        const scaleY = this.canvas.height / rect.height;
+        // Return CSS pixel coordinates (game logic uses CSS pixels)
         return {
-            x: (e.clientX - rect.left) * scaleX,
-            y: (e.clientY - rect.top) * scaleY
+            x: e.clientX - rect.left,
+            y: e.clientY - rect.top
         };
     }
 
     handleDown(e) {
+        e.preventDefault();
         const { x, y } = this.getCoords(e);
         this.game.onPointerDown(x, y);
     }
