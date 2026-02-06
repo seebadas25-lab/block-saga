@@ -227,13 +227,25 @@ canvas {
 
 /* Responsive Layout */
 @media (max-width: 768px) {
+  body {
+    padding: 15px;
+    padding-top: env(safe-area-inset-top, 15px);
+    padding-bottom: env(safe-area-inset-bottom, 15px);
+    padding-left: env(safe-area-inset-left, 15px);
+    padding-right: env(safe-area-inset-right, 15px);
+    box-sizing: border-box;
+  }
+
   #app {
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
     height: auto;
-    min-height: 100vh;
-    padding: 10px;
+    min-height: auto;
+    padding: 15px;
+    margin: 10px;
     box-sizing: border-box;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
   }
 
   #sidebar {
